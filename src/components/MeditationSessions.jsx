@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { getSessions, addSession, copySession, toggleSession } from '../service/sessions'
+import { getSessions, addSession, copySession, toggleSession, deleteSession } from '../service/sessions'
 import MeditationForm from './MeditationForm'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,6 +41,19 @@ function MeditationSessions() {
             notify('Added session')
         } catch (error) {
             console.error("Error adding session:", error)
+        }
+    }
+
+    const deleteMeditationSession = async (_id, description, finishTime) => {
+        console.log("🚀 ~ deleteMeditationSession ~ _id, description, finishTime:", _id, description, finishTime)
+        //check if it's react way to do things
+        if (window.confirm(`Delete ${description} on ${finishTime}`)) {
+            deleteSession(_id)
+            notify('deleted')
+            fetchData()
+        }
+        else {//remove
+            notify('not deleted')
         }
     }
 
@@ -101,6 +114,7 @@ function MeditationSessions() {
                             <th>Finish Time</th>
                             <th>Length</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,6 +152,10 @@ function MeditationSessions() {
                                     copyMeditationSession(description, youTubeUrl, length, thumbnailUrl)
                                     scrollToRef()
                                 }}>Copy Session</button></td>
+                                <td><button className="delete-button"
+                                    onClick={() => {
+                                        deleteMeditationSession(_id, description, finishTime)
+                                    }}>Delete Session</button></td>
                             </tr>)
                         }
                         )}
