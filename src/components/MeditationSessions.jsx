@@ -45,15 +45,10 @@ function MeditationSessions() {
     }
 
     const deleteMeditationSession = async (_id, description, finishTime) => {
-        console.log("🚀 ~ deleteMeditationSession ~ _id, description, finishTime:", _id, description, finishTime)
-        //check if it's react way to do things
         if (window.confirm(`Delete ${description} on ${finishTime}`)) {
-            deleteSession(_id)
-            notify('deleted')
+            await deleteSession(_id)
+            notify(`Deleted: ${description}`)
             fetchData()
-        }
-        else {//remove
-            notify('not deleted')
         }
     }
 

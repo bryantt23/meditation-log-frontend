@@ -31,7 +31,7 @@ button {
 
 /*style these*/
 .delete-button {
-  background-color: red; /*ask for light red*/
+  background-color: #f8d7da;
   transition: background-color 0.3s; /* Smooth transition for hover */
 }
 
