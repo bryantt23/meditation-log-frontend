@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { getSessions, addSession, copySession, toggleSession } from '../service/sessions'
+import { getSessions, addSession, copySession, toggleSession, deleteSession } from '../service/sessions'
 import MeditationForm from './MeditationForm'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,6 +41,14 @@ function MeditationSessions() {
             notify('Added session')
         } catch (error) {
             console.error("Error adding session:", error)
+        }
+    }
+
+    const deleteMeditationSession = async (_id, description, finishTime) => {
+        if (window.confirm(`Delete ${description} on ${finishTime}`)) {
+            await deleteSession(_id)
+            notify(`Deleted: ${description}`)
+            fetchData()
         }
     }
 
@@ -101,6 +109,7 @@ function MeditationSessions() {
                             <th>Finish Time</th>
                             <th>Length</th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -138,6 +147,10 @@ function MeditationSessions() {
                                     copyMeditationSession(description, youTubeUrl, length, thumbnailUrl)
                                     scrollToRef()
                                 }}>Copy Session</button></td>
+                                <td><button className="delete-button"
+                                    onClick={() => {
+                                        deleteMeditationSession(_id, description, finishTime)
+                                    }}>Delete Session</button></td>
                             </tr>)
                         }
                         )}

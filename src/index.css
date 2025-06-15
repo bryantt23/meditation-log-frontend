@@ -29,8 +29,13 @@ button {
   transition: background-color 0.3s; /* Smooth transition for hover */
 }
 
-button:hover {
-  background-color: #bbdefb; /* Slightly darker blue on hover */
+.delete-button {
+  background-color: #f8d7da;
+  transition: background-color 0.3s; /* Smooth transition for hover */
+}
+
+.delete-button:hover {
+  background-color: #f1b0b7;
 }
 
 table {
