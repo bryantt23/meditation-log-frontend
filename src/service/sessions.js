@@ -69,9 +69,9 @@ export const toggleSession = async (id) => {
 export const deleteSession = async (id) => {
     try {
         const response = await axios.delete(`${BASE_URL}/meditations/${id}`)
-        return response.data//TODO look up
+        return response.data
     } catch (error) {
-        console.error("Error delete session:", error);
-        throw error
+        console.error(`❌ Failed to delete session with ID ${id}:`, error?.response?.data || error.message)
+        throw new Error('Failed to delete session. Please try again.')
     }
 }

@@ -29,14 +29,13 @@ button {
   transition: background-color 0.3s; /* Smooth transition for hover */
 }
 
-/*style these*/
 .delete-button {
   background-color: #f8d7da;
   transition: background-color 0.3s; /* Smooth transition for hover */
 }
 
 .delete-button:hover {
-  background-color: orange; /* Slightly darker blue on hover */
+  background-color: #f1b0b7;
 }
 
 table {
